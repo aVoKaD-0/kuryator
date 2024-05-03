@@ -4,28 +4,32 @@ win = tk.Tk()
 
 import math
 ch = 1 # Если число с плавающей надо проверить снова, переменная меняется на 2 и число не проверяется на sqrt, используется в f вынос целого и не целого числа
+
 def vynos_celogo_chisla(number): # выносит целое число
     global ch
     number2 = math.sqrt(number)
     if str(number2).find(".") == len(str(number2))-2 and ch == 1:
         ch = 1
         return int(str(number2)[:-2]), 0
-    a = 1
-    x = 0
-    stepen = 1
-    otvet = 0
-    k = 0
-    while a <= number/2:
-        stepen += 2
-        a += stepen
-        x += 1
-        if number%a == 0 and (a != number):
-            otvet = stepen-x
-            k = a
-    ch = 1
-    if otvet != 0:
-        return otvet, number//k
-    return 0, 0
+    vne_kornya = 1
+    pod_kornem = number
+    false = 0
+    while false != 1:
+        if pod_kornem % 4 == 0:
+            pod_kornem = pod_kornem//4
+            vne_kornya *= 2
+        elif pod_kornem % 9 == 0:
+            pod_kornem = pod_kornem//9
+            vne_kornya *= 3
+        elif pod_kornem % 25 == 0:
+            pod_kornem = pod_kornem//25
+            vne_kornya *= 5
+        else:
+            false = 1
+    if false == 1 and pod_kornem != number:
+        return vne_kornya, pod_kornem
+    else:
+        return 0, 0
 
 def vynos_NeCelogo_chisla(number): # выносит не целое число
     number2 = number
